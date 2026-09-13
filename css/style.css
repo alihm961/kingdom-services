@@ -1,0 +1,657 @@
+/* =========================================================
+   Kingdom Services - stylesheet
+   Volgorde: tokens -> reset -> layout -> componenten -> responsive
+   ========================================================= */
+
+/* ---------- 1. Design tokens (licht) ---------- */
+:root {
+  --paper: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-2: #F3F6F8;
+  --ink: #101B26;
+  --ink-2: #46586A;
+  --ink-3: #7A8B99;
+  --line: #E1E7EC;
+  --line-soft: #EEF2F5;
+  --accent: #2F8FCB;
+  --accent-deep: #1D6C9E;
+  --accent-soft: #E9F3FA;
+  --signal: #A6790E;
+  --on-accent: #FFFFFF;
+
+  /* Lichte "band"-secties (nav, hero, contact) zitten op wit/lichtgrijs */
+  --band-bg: #FFFFFF;
+  --band-ink: var(--ink);
+  --band-ink-2: var(--ink-2);
+  --band-line: var(--line);
+  --band-accent: #D9A536;
+
+  --shadow-sm: 0 1px 2px rgba(16, 27, 38, 0.04);
+  --shadow-md: 0 10px 28px rgba(16, 27, 38, 0.07);
+
+  --maxw: 1120px;
+  --radius: 6px;
+  --gutter: 24px;
+
+  --font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---------- 3. Reset en basis ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p { margin: 0; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: var(--on-accent);
+  padding: 10px 16px;
+  z-index: 100;
+}
+.skip-link:focus { left: 0; }
+
+/* ---------- 4. Layout helpers ---------- */
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+section { padding-block: 76px; }
+.section--tight { padding-top: 0; }
+
+.mono { font-family: var(--font-mono); }
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink-3);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex: none;
+  background: linear-gradient(135deg, var(--accent), var(--signal));
+  transform: rotate(45deg);
+}
+
+.sec-head { max-width: 62ch; margin-bottom: 38px; }
+.sec-head h2 { font-size: clamp(1.55rem, 3.4vw, 2.15rem); margin-top: 12px; }
+.sec-head p { margin-top: 14px; color: var(--ink-2); }
+
+/* ---------- 5. Knoppen ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.btn--solid { background: linear-gradient(135deg, var(--accent), var(--accent-deep)); color: var(--on-accent); }
+.btn--solid:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+.btn--band { background: linear-gradient(135deg, #E7BA57, var(--band-accent)); color: #241C08; }
+.btn--band:hover { filter: brightness(1.06); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+.btn--ghost { border-color: var(--band-line); color: var(--band-ink); }
+.btn--ghost:hover { border-color: var(--band-accent); transform: translateY(-1px); }
+
+/* ---------- 6. Navigatie ---------- */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--band-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--signal));
+}
+
+.nav__in {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-block: 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  text-decoration: none;
+  color: var(--band-ink);
+}
+
+.brand__mark {
+  height: 56px;
+  width: auto;
+  flex: none;
+}
+
+.nav__links { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+
+.nav__links a {
+  text-decoration: none;
+  color: var(--band-ink-2);
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding-block: 4px;
+  border-bottom: 1px solid transparent;
+}
+
+.nav__links a:hover {
+  color: var(--band-ink);
+  border-bottom-color: var(--band-accent);
+}
+
+/* ---------- 7. Hero ---------- */
+.hero {
+  background: var(--band-bg);
+  color: var(--band-ink);
+  padding-block: 72px 0;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -90px;
+  right: -50px;
+  width: 480px;
+  height: 480px;
+  background: url("../img/logo-mark.png") no-repeat center / contain;
+  opacity: 0.05;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__grid {
+  display: grid;
+  gap: 40px;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.hero__eyebrow { color: var(--accent); margin-bottom: 18px; }
+
+.hero h1 {
+  font-size: clamp(2.1rem, 5.2vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--accent);
+  max-width: 15ch;
+}
+
+.hero h1 em { font-style: normal; color: var(--signal); }
+
+.hero__lead {
+  margin-top: 22px;
+  max-width: 56ch;
+  color: var(--band-ink-2);
+  font-size: 1.06rem;
+}
+
+.hero__cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+
+/* Feitenblok rechts in de hero */
+.facts {
+  border: 1px solid var(--band-line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.facts::before {
+  content: "";
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--signal));
+}
+
+.fact {
+  display: flex;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--band-line);
+  min-width: 0;
+}
+.fact:last-child { border-bottom: 0; }
+
+.fact__k {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--band-ink-2);
+  width: 78px;
+  flex: none;
+  padding-top: 3px;
+}
+
+.fact__v {
+  font-size: 0.94rem;
+  color: var(--band-ink);
+  font-weight: 500;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Placeholder tot de echte gegevens ingevuld zijn */
+.ph {
+  color: var(--band-ink-2);
+  font-style: normal;
+  border-bottom: 1px dashed var(--band-line);
+}
+
+/* Scope-strip onderaan de hero */
+.ticker {
+  margin-top: 60px;
+  border-top: 1px solid var(--band-line);
+  border-bottom: 1px solid var(--band-line);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ticker__in { display: flex; min-width: max-content; }
+
+.ticker__in span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--band-ink-2);
+  padding: 14px 22px;
+  border-right: 1px solid var(--band-line);
+  white-space: nowrap;
+}
+.ticker__in span:first-child { padding-left: 0; }
+
+/* ---------- 8. Scope-lijst ---------- */
+.scope {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.scope__row {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.scope__row:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(16, 27, 38, 0.1);
+}
+
+.scope__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.scope__code {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scope__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.76rem;
+  flex: none;
+}
+
+.scope__row:nth-child(2n) .scope__num {
+  background: linear-gradient(135deg, #E7BA57, var(--band-accent));
+  color: #241C08;
+}
+
+.scope__cat {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+
+.scope__title { font-weight: 600; font-size: 1.06rem; }
+
+.scope__desc {
+  color: var(--ink-2);
+  font-size: 0.95rem;
+}
+
+.scope__norm {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  text-align: right;
+  flex: none;
+  white-space: nowrap;
+}
+
+.scope__norm b { display: inline-block; font-weight: 500; color: var(--signal); }
+
+/* ---------- 10. Oplevering ---------- */
+.hand {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.hand__title { font-size: clamp(1.55rem, 3.4vw, 2.15rem); margin-top: 12px; }
+.hand__lead { margin-top: 16px; color: var(--ink-2); max-width: 52ch; }
+.hand__cta { margin-top: 26px; }
+
+.doclist {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.doclist__h {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.doc {
+  display: flex;
+  gap: 14px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--line-soft);
+  align-items: flex-start;
+}
+.doc:last-child { border-bottom: 0; }
+
+.doc__tick {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E7BA57, var(--band-accent));
+  flex: none;
+  margin-top: 1px;
+}
+
+.doc__t { font-weight: 500; font-size: 0.95rem; }
+.doc__s { color: var(--ink-3); font-size: 0.84rem; margin-top: 2px; }
+
+/* ---------- 11. Inhuur ---------- */
+.hire {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.hire__in {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  padding: 44px;
+}
+
+.hire h2 { font-size: clamp(1.45rem, 3vw, 2rem); margin-top: 12px; }
+.hire p { margin-top: 14px; color: var(--ink-2); }
+.hire__cta { margin-top: 24px; }
+
+.hire ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.hire li { display: flex; gap: 12px; font-size: 0.96rem; }
+.hire li::before {
+  content: "\2014";
+  color: var(--accent);
+  font-family: var(--font-mono);
+  flex: none;
+}
+
+/* ---------- 12. Contact ---------- */
+.contact {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.contact__in {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 48px;
+  padding: 48px;
+}
+
+.contact .eyebrow { color: var(--band-ink-2); }
+.contact h2 { color: var(--band-ink); font-size: clamp(1.5rem, 3.2vw, 2.1rem); margin-top: 12px; }
+.contact__lead { color: var(--band-ink-2); margin-top: 14px; max-width: 42ch; }
+
+.cdetails { margin-top: 30px; display: grid; grid-template-columns: minmax(0, 1fr); }
+
+.cdetail {
+  display: flex;
+  gap: 14px;
+  padding-block: 11px;
+  border-bottom: 1px solid var(--band-line);
+  min-width: 0;
+}
+.cdetail .fact__k { width: 88px; }
+.cdetail a { color: var(--accent-deep); text-decoration: none; }
+.cdetail a:hover { text-decoration: underline; }
+
+/* ---------- 13. Formulier ---------- */
+.form { display: grid; gap: 16px; }
+
+.field { display: grid; gap: 6px; }
+
+.field label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--band-ink-2);
+}
+
+.field input,
+.field textarea,
+.field select {
+  font: inherit;
+  font-size: 0.95rem;
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--band-line);
+  color: var(--band-ink);
+}
+
+.field textarea { min-height: 110px; resize: vertical; }
+.field input::placeholder,
+.field textarea::placeholder { color: var(--ink-3); }
+
+.field--row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form__note { font-size: 0.8rem; color: var(--band-ink-2); margin-top: 2px; }
+.form__note[data-state="error"] { color: var(--signal); }
+.form__note[data-state="ok"] { color: var(--accent-deep); }
+
+/* ---------- 14. Footer ---------- */
+.footer {
+  padding-block: 30px;
+  margin-top: 76px;
+  background: var(--surface);
+  position: relative;
+}
+
+.footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--signal));
+}
+
+.footer__in {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer p { font-size: 0.84rem; color: var(--ink-3); }
+
+/* ---------- 14b. WhatsApp-knop (alleen mobiel) ---------- */
+.whatsapp-btn {
+  display: none;
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 60;
+  width: 56px;
+  height: 56px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #25D366;
+  box-shadow: 0 8px 20px rgba(16, 27, 38, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(16, 27, 38, 0.34);
+}
+
+.whatsapp-btn svg { width: 28px; height: 28px; flex: none; }
+
+/* ---------- 15. Responsive ---------- */
+@media (max-width: 900px) {
+  .whatsapp-btn { display: inline-flex; }
+
+  .hero__grid { grid-template-columns: minmax(0, 1fr); }
+
+  .hand { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+
+  .hire__in,
+  .contact__in { grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 32px; }
+
+  .scope { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (min-width: 561px) {
+  .brand__mark { height: 64px; }
+}
+
+@media (max-width: 560px) {
+  section { padding-block: 56px; }
+  .hero { padding-block: 52px 0; }
+  .hero::before { width: 300px; height: 300px; top: -40px; right: -50px; opacity: 0.045; }
+  .field--row { grid-template-columns: 1fr; }
+  .nav__links { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
