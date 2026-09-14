@@ -25,36 +25,29 @@ In VS Code werkt de Live Server extensie ook prima.
 
 ## Nog in te vullen
 
-Zoek op `TODO` en op de class `ph` (placeholder). Beide markeren wat er nog mist:
-
-- E-mailadres, telefoonnummer, KVK-nummer, vestigingsadres
-- Werkgebied (regio's of "heel Nederland")
-- Domein in de `canonical` en `og:` tags
 - VCA en meetapparatuur, als je die als trust-signaal wil noemen
-- Logo in `img/`, en een favicon
 
-Haal bij het invullen de class `ph` weg, anders blijft de gestippelde
-placeholder-styling staan.
+## Formulier
 
-## Formulier koppelen
-
-`js/main.js` valideert nu alleen. Voor echte verzending:
-
-- Bij PHP-hosting: een klein `send.php` endpoint met `mail()` of PHPMailer
-- Zonder backend: Formspree of Web3Forms, dan hoeft er niets te draaien
-- Op Netlify: `data-netlify="true"` op het `form` element
-
-Voeg in alle gevallen een honeypot-veld toe tegen spam.
+`js/main.js` valideert en verstuurt de offerteaanvraag naar Web3Forms
+(`api.web3forms.com/submit`), die 'm doorzet als e-mail naar
+khaledkhattab979@hotmail.com. De access key staat als hidden input in het
+formulier in `index.html`; het `botcheck`-veld is de honeypot tegen spam.
 
 ## Thema
 
-De site volgt het systeemthema van de bezoeker. Alle kleuren staan als
+Vast lichte/witte huisstijl (geen dark mode meer). Alle kleuren staan als
 custom properties bovenin `css/style.css`. Pas daar aan, niet in de
 componenten zelf.
 
 ## Hosting
 
-Statische site, dus alles kan: Vercel, Netlify, Cloudflare Pages, of
-gewone Nederlandse hosting met FTP. Zorg voor HTTPS en een redirect van
-`kingdomservices.nl` naar `www.kingdomservices.nl` (of andersom, kies er
-één).
+Live op Vercel. Broncode staat op GitHub (`alihm961/kingdom-services`,
+branch `master`). Er is een GitHub Actions workflow
+(`.github/workflows/deploy.yml`) die bij elke push naar `master` moet
+deployen, maar die faalt nog (Vercel-token in de repo secrets mist de
+juiste team-scope) — tot dat is opgelost, deploy je handmatig vanuit de
+projectmap met `vercel --prod`.
+
+Domeinen: `kingdomservices.nl` en `www.kingdomservices.nl`, DNS bij
+GoDaddy (A-records naar `76.76.21.21`), SSL via Vercel.

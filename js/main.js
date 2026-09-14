@@ -5,6 +5,7 @@
 
   var form = document.getElementById('quote-form');
   var note = document.getElementById('q-note');
+  var submitBtn = document.getElementById('q-submit');
 
   if (!form || !note) return;
 
@@ -33,11 +34,28 @@
       return;
     }
 
-    // TODO: hier de echte verzending koppelen zodra de site gehost wordt.
-    // Opties: eigen PHP-endpoint, Formspree, of een serverless function.
-    setNote(
-      'Bedankt ' + name.split(' ')[0] + '. Zodra de site live staat wordt deze aanvraag direct verstuurd.',
-      'ok'
-    );
+    if (submitBtn) submitBtn.disabled = true;
+    setNote('Bezig met versturen...', null);
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form))),
+    })
+      .then(function (response) { return response.json(); })
+      .then(function (result) {
+        if (result.success) {
+          form.reset();
+          setNote('Bedankt ' + name.split(' ')[0] + '. Je aanvraag is verstuurd, je hoort binnen twee werkdagen van ons.', 'ok');
+        } else {
+          setNote('Versturen is niet gelukt. Probeer het opnieuw of mail ons rechtstreeks.', 'error');
+        }
+      })
+      .catch(function () {
+        setNote('Versturen is niet gelukt. Probeer het opnieuw of mail ons rechtstreeks.', 'error');
+      })
+      .finally(function () {
+        if (submitBtn) submitBtn.disabled = false;
+      });
   });
 })();

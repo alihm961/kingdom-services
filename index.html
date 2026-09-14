@@ -7,12 +7,14 @@
   <title>Kingdom Services | Datanetwerken en elektra</title>
   <meta name="description" content="Kingdom Services legt databekabeling aan, plaatst netwerkapparatuur en access points en verzorgt de bijbehorende elektra. Inclusief meetrapport, certificering en revisiedocumentatie.">
 
-  <!-- TODO: invullen zodra het domein live staat -->
   <link rel="canonical" href="https://www.kingdomservices.nl/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="nl_NL">
   <meta property="og:title" content="Kingdom Services | Datanetwerken en elektra">
   <meta property="og:description" content="Netwerkinfrastructuur aangelegd en gecertificeerd opgeleverd. Inzetbaar als onderaannemer per project of per ploeg.">
+
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="apple-touch-icon" href="img/mark.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -229,6 +231,9 @@
             </div>
 
             <form class="form" id="quote-form" novalidate>
+              <input type="hidden" name="access_key" value="8fc854fc-c97d-4602-a964-faac47f8b605">
+              <input type="hidden" name="subject" value="Nieuwe offerteaanvraag via kingdomservices.nl">
+              <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
               <div class="field--row">
                 <div class="field">
                   <label for="q-name">Naam</label>
@@ -267,8 +272,8 @@
                 <textarea id="q-msg" name="message" placeholder="Locatie, aantal werkplekken, gewenste startdatum"></textarea>
               </div>
 
-              <button class="btn btn--band" type="submit">Aanvraag versturen</button>
-              <p class="form__note" id="q-note" role="status">Concept. Het formulier wordt gekoppeld zodra de site gehost wordt.</p>
+              <button class="btn btn--band" type="submit" id="q-submit">Aanvraag versturen</button>
+              <p class="form__note" id="q-note" role="status">We reageren binnen twee werkdagen.</p>
             </form>
           </div>
         </div>
