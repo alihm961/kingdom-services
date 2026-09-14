@@ -39,8 +39,8 @@
 
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      headers: { Accept: 'application/json' },
+      body: new FormData(form),
     })
       .then(function (response) { return response.json(); })
       .then(function (result) {
