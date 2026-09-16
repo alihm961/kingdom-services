@@ -473,34 +473,6 @@ section { padding-block: 76px; }
 .doc__t { font-weight: 500; font-size: 0.95rem; }
 .doc__s { color: var(--ink-3); font-size: 0.84rem; margin-top: 2px; }
 
-/* ---------- 11. Inhuur ---------- */
-.hire {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-}
-
-.hire__in {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 40px;
-  padding: 44px;
-}
-
-.hire h2 { font-size: clamp(1.45rem, 3vw, 2rem); margin-top: 12px; }
-.hire p { margin-top: 14px; color: var(--ink-2); }
-.hire__cta { margin-top: 24px; }
-
-.hire ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-.hire li { display: flex; gap: 12px; font-size: 0.96rem; }
-.hire li::before {
-  content: "\2014";
-  color: var(--accent);
-  font-family: var(--font-mono);
-  flex: none;
-}
-
 /* ---------- 12. Contact ---------- */
 .contact {
   background: var(--surface);
@@ -630,7 +602,6 @@ section { padding-block: 76px; }
 
   .hand { grid-template-columns: minmax(0, 1fr); gap: 32px; }
 
-  .hire__in,
   .contact__in { grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 32px; }
 
   .scope { grid-template-columns: minmax(0, 1fr); }
