@@ -43,11 +43,11 @@ componenten zelf.
 ## Hosting
 
 Live op Vercel. Broncode staat op GitHub (`alihm961/kingdom-services`,
-branch `master`). Er is een GitHub Actions workflow
-(`.github/workflows/deploy.yml`) die bij elke push naar `master` moet
-deployen, maar die faalt nog (Vercel-token in de repo secrets mist de
-juiste team-scope) — tot dat is opgelost, deploy je handmatig vanuit de
-projectmap met `vercel --prod`.
+branch `master`). Een push deployt niet automatisch; deploy handmatig
+vanuit de projectmap met `vercel --prod`.
+
+E-mail (`info@kingdomservices.nl`) loopt via Microsoft 365, gekocht bij
+GoDaddy.
 
 Domeinen: `kingdomservices.nl` en `www.kingdomservices.nl`, DNS bij
 GoDaddy (A-records naar `76.76.21.21`), SSL via Vercel.
