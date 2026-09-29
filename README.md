@@ -31,7 +31,7 @@ In VS Code werkt de Live Server extensie ook prima.
 
 `js/main.js` valideert en verstuurt de offerteaanvraag naar Web3Forms
 (`api.web3forms.com/submit`), die 'm doorzet als e-mail naar
-khaledkhattab979@hotmail.com. De access key staat als hidden input in het
+info@kingdomservices.nl. De access key staat als hidden input in het
 formulier in `index.html`; het `botcheck`-veld is de honeypot tegen spam.
 
 ## Thema
